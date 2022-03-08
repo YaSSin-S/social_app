@@ -116,7 +116,57 @@ class ChatMessagesScreen extends StatelessWidget {
                   ),
                 ),
                 fallback: (context) =>
-                    Center(child: Text('Error Viewing Your Chat')),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Center(child: Text('Start Conversation With ${usersModel.name}'),),
+                          ),
+                          Container(
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(width: 1),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: TextFormField(
+                                      controller: messageController,
+                                      decoration: InputDecoration(
+                                        hintText: 'Message',
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: defaultColor,
+                                  ),
+                                  child: IconButton(
+                                      onPressed: () {
+                                        cubit.sendMessage(
+                                          messageController.text,
+                                          DateTime.now().toString(),
+                                          usersModel.uID,
+                                        );
+                                      },
+                                      icon: Icon(
+                                        FeatherIcons.send,
+                                        color: Colors.white,
+                                      )),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
               ),
             );
           },

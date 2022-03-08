@@ -446,7 +446,7 @@ class SocialCubit extends Cubit<SocialStates> {
         .collection('chats')
         .doc(receiverId)
         .collection('messages')
-        .orderBy('dateTime')
+        .orderBy('date_time')
         .snapshots()
         .listen((event) {
       messages = [];
